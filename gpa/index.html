@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>حساب المعدل | مركز الطالبة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css?v=2" />
+</head>
+<body>
+  <header class="topbar">
+    <a href="../index.html" class="back-link">⟵ الرئيسية</a>
+    <h1>حساب المعدل</h1>
+    <button id="reset-btn" class="ghost-btn">ابدأ من جديد</button>
+  </header>
+
+  <div class="notice">
+    بياناتك محفوظة مؤقتًا على هذا الجهاز فقط (بدون تسجيل). لحفظها بشكل دائم،
+    <a href="../auth/login.html?redirect=gpa">سجّلي الدخول</a> أو
+    <a href="../auth/signup.html">أنشئي حسابًا</a>.
+  </div>
+
+  <main id="app">
+    <section id="setup-plan" class="card setup-section">
+      <h2>1. اختاري البديل الدراسي للسنة الأولى</h2>
+      <p class="hint">يحدد هذا الاختيار مقررات الفصل الأول والثاني.</p>
+      <div class="choice-grid" id="plan-choices"></div>
+    </section>
+
+    <section id="semesters-container"></section>
+
+    <section id="summary" class="card hidden">
+      <h2>ملخص المعدلات</h2>
+      <table class="summary-table">
+        <thead>
+          <tr><th>الفصل</th><th>المعدل الفصلي</th><th>المعدل التراكمي</th></tr>
+        </thead>
+        <tbody id="summary-body"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer">إعداد: أ. أمينة محمد الصائغ</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../shared/supabase.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

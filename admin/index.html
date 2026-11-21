@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>إدارة المقررات | مركز الطالبة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a href="../index.html" style="color:#fff;text-decoration:none;font-size:0.85rem;">⟵ الرئيسية</a>
+    <h1>إدارة المقررات</h1>
+    <button id="logout-btn" class="ghost-btn">تسجيل الخروج</button>
+  </header>
+
+  <main id="app">
+    <div id="status-card" class="card">
+      <p>جاري التحقق من الصلاحية...</p>
+    </div>
+
+    <div id="manager" class="card hidden">
+      <h2>اختاري المجموعة والفصل</h2>
+      <div class="filters">
+        <div class="field">
+          <label for="group-select">المجموعة</label>
+          <select id="group-select"></select>
+        </div>
+        <div class="field">
+          <label for="semester-select">الفصل الدراسي</label>
+          <select id="semester-select"></select>
+        </div>
+      </div>
+    </div>
+
+    <div id="courses-card" class="card hidden">
+      <h2 id="courses-title">المقررات</h2>
+      <table class="courses-table">
+        <thead>
+          <tr>
+            <th>الترتيب</th>
+            <th>المقرر</th>
+            <th>عدد الساعات</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="courses-body"></tbody>
+      </table>
+      <p class="hours-sum" id="hours-sum"></p>
+
+      <div class="add-form">
+        <div class="field">
+          <label>الترتيب</label>
+          <input type="number" id="new-order" min="1" />
+        </div>
+        <div class="field">
+          <label>رمز المقرر</label>
+          <input type="text" id="new-code" />
+        </div>
+        <div class="field">
+          <label>عدد الساعات</label>
+          <input type="number" id="new-hours" min="1" />
+        </div>
+        <button id="add-btn" class="primary-btn">إضافة مقرر</button>
+      </div>
+
+      <p class="msg hidden" id="msg"></p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../shared/supabase.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

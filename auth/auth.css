@@ -1,0 +1,123 @@
+:root {
+  --primary: #6c5ce7;
+  --primary-dark: #5a4bd1;
+  --header-bg: #122355;
+  --header-bg-dark: #0b1738;
+  --bg: #f6f5fb;
+  --card-bg: #ffffff;
+  --border: #e3e1f0;
+  --text: #2d2a3d;
+  --muted: #7a7690;
+  --accent: #ff7675;
+  --success: #2e8b57;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Cairo", "Tahoma", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+header.topbar {
+  background: linear-gradient(135deg, var(--header-bg), var(--header-bg-dark));
+  color: #fff;
+  text-align: center;
+  padding: 28px 16px 22px;
+}
+
+header.topbar h1 { margin: 0; font-size: 1.4rem; }
+
+main {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px 22px;
+  box-shadow: 0 2px 10px rgba(80, 70, 150, 0.07);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.field { margin-bottom: 14px; }
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.field input:focus {
+  outline: 2px solid var(--primary);
+}
+
+.primary-btn {
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 6px;
+  font-family: inherit;
+}
+
+.primary-btn:hover { background: var(--primary-dark); }
+
+.msg {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.msg.error { background: #ffecec; color: #c0392b; }
+.msg.success { background: #eafaf1; color: var(--success); }
+.msg.hidden { display: none; }
+
+.links {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.links a {
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+.links a:hover { text-decoration: underline; }
+
+.back-home {
+  display: block;
+  text-align: center;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
