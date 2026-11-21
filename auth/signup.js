@@ -20,7 +20,8 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
     return;
   }
 
-  const { data, error } = await sb.auth.signUp({ email, password });
+  const emailRedirectTo = window.location.origin + window.location.pathname.replace("signup.html", "login.html");
+  const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo } });
   if (error) {
     showMsg(error.message.includes("already") ? "هذا البريد مسجّل مسبقًا." : "تعذّر إنشاء الحساب، حاولي مرة أخرى.", "error");
     return;
