@@ -1,7 +1,7 @@
 // إعداد الاتصال بـ Supabase لكل صفحات الموقع.
 // تُعبَّى هاتين القيمتين تلقائيًا بعد ربط مشروع Supabase.
-const SUPABASE_URL = "";
-const SUPABASE_ANON_KEY = "";
+const SUPABASE_URL = "https://houmfvedmduskghryspt.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_5l4aZan6fZD4ZtWUzbwECw_MDCHYu4P";
 
 function getSupabaseClient() {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;

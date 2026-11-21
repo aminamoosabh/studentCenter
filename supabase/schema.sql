@@ -13,12 +13,20 @@ create table if not exists public.profiles (
 
 alter table public.profiles enable row level security;
 
+-- دالة تتحقق هل المستخدم الحالي أدمن، بدون ما تسبب تكرار لا نهائي في سياسات RLS
+-- (لازم security definer عشان تتجاوز RLS وقت قراءتها لنفس جدول profiles)
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+as $$
+  select exists (select 1 from public.profiles where id = auth.uid() and role = 'admin');
+$$;
+
 create policy "profiles_select_own_or_admin"
   on public.profiles for select
-  using (
-    auth.uid() = id
-    or exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin')
-  );
+  using (auth.uid() = id or public.is_admin());
 
 create policy "profiles_update_own"
   on public.profiles for update
@@ -65,8 +73,8 @@ create policy "courses_select_all"
 
 create policy "courses_admin_write"
   on public.courses for all
-  using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'))
-  with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
+  using (public.is_admin())
+  with check (public.is_admin());
 
 -- 3) المعدلات المحفوظة لكل طالبة صاحبة حساب (بدل/بالإضافة للحفظ المؤقت بالمتصفح)
 create table if not exists public.gpa_records (
@@ -83,6 +91,19 @@ create policy "gpa_records_owner_only"
   on public.gpa_records for all
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+-- إنشاء الجداول والسياسات لا يكفي وحده؛ Postgres يحتاج صلاحيات أساسية صريحة
+-- لأدوار anon/authenticated قبل ما تقدر تصل للجداول أصلاً
+grant usage on schema public to anon, authenticated;
+
+grant select on public.courses to anon, authenticated;
+grant insert, update, delete on public.courses to authenticated;
+
+grant select, update on public.profiles to authenticated;
+
+grant select, insert, update, delete on public.gpa_records to authenticated;
+
+grant execute on function public.is_admin() to anon, authenticated;
 
 -- 4) تعبئة المقررات الأساسية من الخطة الدراسية الرسمية (190 مقرر)
 insert into public.courses (group_type, group_key, semester, code, hours, sort_order)
